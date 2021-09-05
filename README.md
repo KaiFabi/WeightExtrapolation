@@ -7,3 +7,13 @@ A weight extrapolation method for gradient-based optimization.
 </div>
 
 More information about this project can be found on my [blog](https://kaifabi.github.io).
+
+```bibtex
+@misc{blogpost,
+  title={Gradient-based Weight Extrapolation},
+  author={Fabi, Kai},
+  howpublished={\url{https://kaifabi.github.io/2021/09/05/weight-extrapolation.html}},
+  year={2021}
+}
+```
+
