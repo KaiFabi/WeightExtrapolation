@@ -62,7 +62,6 @@ class Extrapolator(Optimizer):
                     param_state['grad_1'] = torch.clone(d_p).detach()
                     param_state['grad_2'] = torch.clone(d_p).detach()
                 else:
-                    # if (state["step"]+1) % 6 == 0:
                     if state["step"] > 2:
                         grad_1 = param_state['grad_1']
                         grad_2 = param_state['grad_2']
@@ -70,19 +69,16 @@ class Extrapolator(Optimizer):
                         # Extrapolation step
                         # First order part of extrapolation step
                         grad = 11.0*d_p - 7.0*grad_1 + 2.0*grad_2
-                        #torch.nn.utils.clip_grad_norm_(grad, 1.0)
                         alpha = -((dt * eta) / (6.0 * h))
                         p.data.add_(grad, alpha=alpha)
 
                         # Second order part of extrapolation step
                         grad = 2.0*d_p - 3.0*grad_1 + grad_2
-                        # torch.nn.utils.clip_grad_norm_(grad, 1.0)
                         alpha = -((dt**2 * eta) / (2.0 * h**2))
                         p.data.add_(grad, alpha=alpha)
 
                         # # Third order part of extrapolation step
                         grad = d_p - 2.0*grad_1 + grad_2
-                        # torch.nn.utils.clip_grad_norm_(grad, 1.0)
                         alpha = -((dt**3 * eta) / (6.0 * h**3))
                         p.data.add_(grad, alpha=alpha)
 
