@@ -89,9 +89,3 @@ class Extrapolator(Optimizer):
                 state["step"] += 1
 
         return loss
-
-    def set_eta(self):
-        state_dict = self.state_dict()
-        for param_group in state_dict["param_groups"]:
-            param_group["eta"] *= 0.1
-        self.load_state_dict(state_dict)
